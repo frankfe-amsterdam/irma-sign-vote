@@ -4,7 +4,7 @@
     "description": "IRMA Demo node server",
     "main": "index.js",
     "scripts": {
-        "dev": "npx nodemon index.js --verbose",
+        "dev": "npx nodemon --watch ./client index.js --verbose",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [],
@@ -12,6 +12,7 @@
     "license": "ISC",
     "dependencies": {
         "cors": "^2.8.5",
+        "dotenv": "^8.2.0",
         "express": "^4.17.1",
         "express-http-proxy": "^1.6.2",
         "http-proxy-middleware": "^1.0.6",
