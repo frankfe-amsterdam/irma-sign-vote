@@ -1,0 +1,26 @@
+{
+    "name": "server",
+    "version": "1.0.0",
+    "description": "IRMA Demo node server",
+    "main": "index.js",
+    "scripts": {
+        "dev": "npx nodemon index.js --verbose",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "express-http-proxy": "^1.6.2",
+        "http-proxy-middleware": "^1.0.6",
+        "nodemon": "^2.0.7",
+        "pg-promise": "^10.9.2",
+        "uuid": "^8.3.2"
+    },
+    "devDependencies": {
+        "@privacybydesign/irma-backend": "^0.1.4",
+        "@privacybydesign/irma-jwt": "^0.1.1"
+    }
+}
