@@ -30,16 +30,31 @@ const init = async () => {
 
     app.use(express.json());
 
-    app.get("/sign", cors(), function () {
+    app.get("/start", cors(), function () {
       console.log("signing started");
     });
     app.get("/config", cors(), getConfig);
     app.get("/health", cors(), health);
 
-    app.use(express.static(config.docroot, { index: false }));
-    app.get("*", function (req, res) {
-      res.sendFile(path.join(__dirname, config.docroot, "index.html"));
-    });
+    if (
+      process.env.NODE_ENV === "acceptance" ||
+      process.env.NODE_ENV === "production"
+    ) {
+      app.use(express.static(config.docroot, { index: false }));
+      app.get("*", secured, function (req, res) {
+        res.sendFile(path.join(__dirname, config.docroot, "index.html"));
+      });
+    } else {
+      console.log("Using proxy to the react app for development");
+      // proxy the root to the react app container in development mode
+      app.use(
+        "/",
+        createProxyMiddleware({
+          target: "http://localhost:8080",
+          changeOrigin: true,
+        })
+      );
+    }
 
     app.listen(config.port, () =>
       console.log(
