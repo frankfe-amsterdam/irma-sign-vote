@@ -3,8 +3,8 @@ import irma from '@privacybydesign/irma-frontend';
 const signVote = async () => {
     try {
         const result = await irmaWeb.start();
-        const reducedResult = reduceIRMAResult(result.disclosed);
-        return reducedResult;
+        console.log('Result: ', result);
+        return result;
     } catch (e) {
         return null;
     }
@@ -12,23 +12,6 @@ const signVote = async () => {
 
 const btnEl = document.querySelector('button');
 btnEl.addEventListener('click', signVote);
-
-const reduceIRMAResult = disclosedCredentialSets => {
-    let joinedResults = {};
-    disclosedCredentialSets.forEach(conjunction => {
-        joinedResults = {
-            ...joinedResults,
-            ...conjunction.reduce(
-                (acc, { id, rawvalue }) => ({
-                    ...acc,
-                    [id.match(/[^.]*$/g)[0]]: rawvalue
-                }),
-                {}
-            )
-        };
-    });
-    return joinedResults;
-};
 
 const irmaWeb = irma.newWeb({
     debugging: true,
