@@ -97,10 +97,9 @@ const irmaSignRequest = async (req, res) => {
     try {
         const session = await irmaBackend.startSession(jwt);
 
-        res.json(session);
-    } catch (e) {
-        console.log('irma.startSession error:', JSON.stringify(e));
-        error(e, res);
+        res.status(200).json(session);
+    } catch (err) {
+        return res.status(405).json({ err: err.message });
     }
 };
 
