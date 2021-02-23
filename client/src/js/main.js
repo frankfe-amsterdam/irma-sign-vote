@@ -1,8 +1,5 @@
 import irma from '@privacybydesign/irma-frontend';
 
-const btnEl = document.querySelector('button');
-btnEl.addEventListener('click', signVote);
-
 const signVote = async () => {
     try {
         const result = await irmaWeb.start();
@@ -12,6 +9,9 @@ const signVote = async () => {
         return null;
     }
 };
+
+const btnEl = document.querySelector('button');
+btnEl.addEventListener('click', signVote);
 
 const reduceIRMAResult = disclosedCredentialSets => {
     let joinedResults = {};
